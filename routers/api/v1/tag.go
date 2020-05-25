@@ -11,6 +11,12 @@ import (
 	"net/http"
 )
 
+const (
+	resCode = "code"
+	resMsg  = "msg"
+	resData = "data"
+)
+
 func GetTags(ctx *gin.Context) {
 	name := ctx.Query("name")
 
@@ -33,9 +39,9 @@ func GetTags(ctx *gin.Context) {
 	data["total"] = models.GetTagTotal(maps)
 
 	ctx.JSON(http.StatusOK, gin.H{
-		"code": code,
-		"msg":  e.GetMsg(code),
-		"data": data,
+		resCode: code,
+		resMsg:  e.GetMsg(code),
+		resData: data,
 	})
 }
 
@@ -61,15 +67,35 @@ func AddTag(ctx *gin.Context) {
 	}
 
 	ctx.JSON(http.StatusOK, gin.H{
-		"code": code,
-		"msg":  e.GetMsg(code),
-		"data": make(map[string]string),
+		resCode: code,
+		resMsg:  e.GetMsg(code),
+		resData: make(map[string]string),
 	})
 
 }
 
 func DeleteTags(ctx *gin.Context) {
+	id := com.StrTo(ctx.Param("id")).MustInt()
 
+	valid := validation.Validation{}
+	valid.Min(id, 1, "id").Message("ID必须大于0")
+
+	code := e.INVALID_PARAMS
+
+	if !valid.HasErrors() {
+		code = e.SUCCESS
+		if models.ExistTagById(id) {
+			models.DeleteTag(id)
+		} else {
+			code = e.ERROR_NOT_EXIST_TAG
+		}
+	}
+
+	ctx.JSON(http.StatusOK, gin.H{
+		resCode: code,
+		resMsg:  e.GetMsg(code),
+		resData: make(map[string]string),
+	})
 }
 func EditTags(ctx *gin.Context) {
 
