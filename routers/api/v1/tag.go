@@ -98,5 +98,39 @@ func DeleteTags(ctx *gin.Context) {
 	})
 }
 func EditTags(ctx *gin.Context) {
+	id := com.StrTo(ctx.Param("id")).MustInt()
+	name := ctx.Query("name")
+	modifiedBy := ctx.Query("modified_by")
 
+	valid := validation.Validation{}
+
+	var state int = -1
+	if arg := ctx.Query("state"); arg != "" {
+		state = com.StrTo(arg).MustInt()
+	}
+
+	valid.Required(id, "id").Message("ID不能为空")
+	valid.Required(modifiedBy, "modified_by").Message("修改人不能为空")
+	valid.MaxSize(modifiedBy, 100, "modified_by").Message("修改人最大长度为100字符")
+
+	code := e.INVALID_PARAMS
+	if !valid.HasErrors() {
+		code = e.SUCCESS
+		if models.ExistTagById(id) {
+			data := make(map[string]interface{})
+			if name != "" {
+				data["name"] = name
+			}
+			if state != -1 {
+				data["state"] = state
+			}
+			models.EditTag(id, data)
+		}
+	}
+
+	ctx.JSON(http.StatusOK, gin.H{
+		resCode: code,
+		resMsg:  e.GetMsg(code),
+		resData: make(map[string]string),
+	})
 }
