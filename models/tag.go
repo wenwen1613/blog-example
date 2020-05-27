@@ -6,14 +6,6 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
-const (
-	id         = "id"
-	name       = "name"
-	createdBy  = "created_by"
-	state      = "state"
-	modifiedBy = "modified_by"
-)
-
 //Tag 结构体
 type Tag struct {
 	Model
@@ -39,7 +31,7 @@ func GetTagTotal(maps interface{}) (count int) {
 //ExistTagByName by name.
 func ExistTagByName(name string) bool {
 	var tag Tag
-	db.Select(id).Where("name=?", name).First(&tag)
+	db.Select("id").Where("name=?", name).First(&tag)
 	if tag.ID > 0 {
 		return true
 	}
@@ -49,7 +41,7 @@ func ExistTagByName(name string) bool {
 //ExistTagById 根据id判断是否存在.
 func ExistTagById(id int) bool {
 	var tag Tag
-	db.Select(id).Where("id=?", id).First(&tag)
+	db.Select("id").Where("id=?", id).First(&tag)
 	if tag.ID > 0 {
 		return true
 	}
