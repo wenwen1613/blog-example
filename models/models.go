@@ -2,14 +2,16 @@ package models
 
 import (
 	"fmt"
+	"log"
+
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"github.com/wenwen1613/blog-example/pkg/setting"
-	"log"
 )
 
 var db *gorm.DB
 
+//Model 基本模型结构
 type Model struct {
 	ID         int `gorm:"primary_key" json:"id"`
 	CreatedOn  int `json:"created_on"`
@@ -53,6 +55,7 @@ func init() {
 	db.DB().SetMaxOpenConns(100)
 }
 
+//CloseDB 关闭数据库.
 func CloseDB() {
 	defer db.Close()
 }

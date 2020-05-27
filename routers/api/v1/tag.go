@@ -1,6 +1,8 @@
 package v1
 
 import (
+	"net/http"
+
 	"github.com/astaxie/beego/validation"
 	"github.com/gin-gonic/gin"
 	"github.com/unknwon/com"
@@ -8,7 +10,6 @@ import (
 	"github.com/wenwen1613/blog-example/pkg/e"
 	"github.com/wenwen1613/blog-example/pkg/setting"
 	"github.com/wenwen1613/blog-example/pkg/util"
-	"net/http"
 )
 
 const (
@@ -17,6 +18,7 @@ const (
 	resData = "data"
 )
 
+//GetTags 查询标签
 func GetTags(ctx *gin.Context) {
 	name := ctx.Query("name")
 
@@ -45,6 +47,7 @@ func GetTags(ctx *gin.Context) {
 	})
 }
 
+//AddTag 添加标签
 func AddTag(ctx *gin.Context) {
 	name := ctx.Query("name")
 	state := com.StrTo(ctx.Query("state")).MustInt()
@@ -74,6 +77,7 @@ func AddTag(ctx *gin.Context) {
 
 }
 
+//DeleteTags 删除标签
 func DeleteTags(ctx *gin.Context) {
 	id := com.StrTo(ctx.Param("id")).MustInt()
 
@@ -97,6 +101,8 @@ func DeleteTags(ctx *gin.Context) {
 		resData: make(map[string]string),
 	})
 }
+
+//EditTags 编辑标签
 func EditTags(ctx *gin.Context) {
 	id := com.StrTo(ctx.Param("id")).MustInt()
 	name := ctx.Query("name")
