@@ -16,12 +16,14 @@ require (
 	github.com/jinzhu/gorm v1.9.12
 	github.com/mailru/easyjson v0.7.1 // indirect
 	github.com/shiena/ansicolor v0.0.0-20151119151921-a422bbe96644 // indirect
+	github.com/swaggo/gin-swagger v1.2.0
 	github.com/swaggo/swag v1.6.6 // indirect
 	github.com/unknwon/com v1.0.1
 	github.com/urfave/cli/v2 v2.2.0 // indirect
 	golang.org/x/net v0.0.0-20200520182314-0ba52f642ac2 // indirect
 	golang.org/x/sys v0.0.0-20200523222454-059865788121 // indirect
 	golang.org/x/tools v0.0.0-20200527183253-8e7acdbce89d // indirect
+	google.golang.org/protobuf v1.24.0 // indirect
 	gopkg.in/ini.v1 v1.56.0 // indirect
 	gopkg.in/yaml.v2 v2.3.0 // indirect
 )
