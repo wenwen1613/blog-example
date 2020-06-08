@@ -14,7 +14,7 @@ var (
 	F *os.File
 
 	DefaultPrefix    = ""
-	DefautlCallDepth = 2
+	DefaultCallDepth = 2
 
 	logger     *log.Logger
 	logPrefix  = ""
@@ -67,7 +67,7 @@ func Fatal(v ...interface{}) {
 }
 
 func setPrefix(level Level) {
-	_, file, line, ok := runtime.Caller(DefautlCallDepth)
+	_, file, line, ok := runtime.Caller(DefaultCallDepth)
 	if ok {
 		logPrefix = fmt.Sprintf("[%s][%s:%d]", levelFlags[level], filepath.Base(file), line)
 	} else {
