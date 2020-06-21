@@ -1,11 +1,5 @@
 package models
 
-import (
-	"time"
-
-	"github.com/jinzhu/gorm"
-)
-
 //Tag 结构体
 type Tag struct {
 	Model
@@ -38,8 +32,8 @@ func ExistTagByName(name string) bool {
 	return false
 }
 
-//ExistTagById 根据id判断是否存在.
-func ExistTagById(id int) bool {
+//ExistTagByID  根据id判断是否存在.
+func ExistTagByID(id int) bool {
 	var tag Tag
 	db.Select("id").Where("id=?", id).First(&tag)
 	if tag.ID > 0 {
@@ -59,16 +53,16 @@ func AddTag(name string, state int, createdBy string) bool {
 }
 
 //BeforeCreate 在创建之前执行.
-func (tag *Tag) BeforeCreate(scope *gorm.Scope) error {
-	_ = scope.SetColumn("CreatedOn", time.Now().Unix())
-	return nil
-}
+// func (tag *Tag) BeforeCreate(scope *gorm.Scope) error {
+// 	_ = scope.SetColumn("CreatedOn", time.Now().Unix())
+// 	return nil
+// }
 
 //BeforeUpdate 在更新之前操作.
-func (tag *Tag) BeforeUpdate(scope *gorm.Scope) error {
-	_ = scope.SetColumn("ModifiedOn", time.Now().Unix())
-	return nil
-}
+// func (tag *Tag) BeforeUpdate(scope *gorm.Scope) error {
+// 	_ = scope.SetColumn("ModifiedOn", time.Now().Unix())
+// 	return nil
+// }
 
 //DeleteTag 删除标签.
 func DeleteTag(id int) bool {

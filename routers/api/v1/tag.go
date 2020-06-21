@@ -47,7 +47,14 @@ func GetTags(ctx *gin.Context) {
 	})
 }
 
-//AddTag 添加标签
+// AddTag 增加标签
+// @Summary 新增文章标签
+// @Produce  json
+// @Param name query string true "Name"
+// @Param state query int false "State"
+// @Param created_by query int false "CreatedBy"
+// @Success 200 {string} json "{"code":200,"data":{},"msg":"ok"}"
+// @Router /api/v1/tags [post]
 func AddTag(ctx *gin.Context) {
 	name := ctx.Query("name")
 	state := com.StrTo(ctx.Query("state")).MustInt()
@@ -88,7 +95,7 @@ func DeleteTags(ctx *gin.Context) {
 
 	if !valid.HasErrors() {
 		code = e.SUCCESS
-		if models.ExistTagById(id) {
+		if models.ExistTagByID(id) {
 			models.DeleteTag(id)
 		} else {
 			code = e.ERROR_NOT_EXIST_TAG
@@ -122,7 +129,7 @@ func EditTags(ctx *gin.Context) {
 	code := e.INVALID_PARAMS
 	if !valid.HasErrors() {
 		code = e.SUCCESS
-		if models.ExistTagById(id) {
+		if models.ExistTagByID(id) {
 			data := make(map[string]interface{})
 			if name != "" {
 				data["name"] = name

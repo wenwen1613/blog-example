@@ -100,7 +100,7 @@ func AddArticle(ctx *gin.Context) {
 
 	code := e.INVALID_PARAMS
 	if !valid.HasErrors() {
-		if models.ExistTagById(tagID) {
+		if models.ExistTagByID(tagID) {
 			data := make(map[string]interface{})
 			data["tag_id"] = tagID
 			data["desc"] = desc
@@ -154,7 +154,7 @@ func EditArticle(ctx *gin.Context) {
 	code := e.INVALID_PARAMS
 	if !valid.HasErrors() {
 		if models.ExistArticleByID(id) {
-			if models.ExistTagById(tagID) {
+			if models.ExistTagByID(tagID) {
 				maps := make(map[string]interface{})
 				if tagID > 0 {
 					maps["tag_id"] = tagID
