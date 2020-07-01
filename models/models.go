@@ -71,13 +71,13 @@ func updateTimeStampForCreateCallback(scope *gorm.Scope) {
 		nowTime := time.Now().Unix()
 		if createTimeField, ok := scope.FieldByName("CreatedOn"); ok {
 			if createTimeField.IsBlank {
-				createTimeField.Set(nowTime)
+				_ = createTimeField.Set(nowTime)
 			}
 		}
 
 		if updateTimeField, ok := scope.FieldByName("ModifiedOn"); ok {
 			if updateTimeField.IsBlank {
-				updateTimeField.Set(nowTime)
+				_ = updateTimeField.Set(nowTime)
 			}
 		}
 	}
@@ -86,7 +86,7 @@ func updateTimeStampForCreateCallback(scope *gorm.Scope) {
 //updateTimeStampForUpdateCallback will set `ModifyTime` when updating
 func updateTimeStampForUpdateCallback(scope *gorm.Scope) {
 	if _, ok := scope.FieldByName("gorm:update_column"); ok {
-		scope.SetColumn("ModifiedOn", time.Now().Unix())
+		_ = scope.SetColumn("ModifiedOn", time.Now().Unix())
 	}
 }
 
