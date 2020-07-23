@@ -14,6 +14,10 @@ import (
 )
 
 //GetArticle 根据ID查询文章
+//@Summary 根据ID查询文章
+//@Param id path int true "ID"
+//@Success 200 {string} json "{"code":200,"data":{},"msg":"ok"}"
+//@Router /api/v1/article [get]
 func GetArticle(ctx *gin.Context) {
 	id := com.StrTo(ctx.Param("id")).MustInt()
 

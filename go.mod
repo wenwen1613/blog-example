@@ -4,7 +4,6 @@ go 1.13
 
 require (
 	github.com/astaxie/beego v1.12.1
-	github.com/cpuguy83/go-md2man/v2 v2.0.0 // indirect
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/gin-gonic/gin v1.6.3
 	github.com/go-ini/ini v1.56.0
@@ -15,11 +14,9 @@ require (
 	github.com/golang/protobuf v1.4.2 // indirect
 	github.com/jinzhu/gorm v1.9.12
 	github.com/mailru/easyjson v0.7.1 // indirect
-	github.com/shiena/ansicolor v0.0.0-20151119151921-a422bbe96644 // indirect
 	github.com/swaggo/gin-swagger v1.2.0
 	github.com/swaggo/swag v1.6.6 // indirect
 	github.com/unknwon/com v1.0.1
-	github.com/urfave/cli/v2 v2.2.0 // indirect
 	golang.org/x/net v0.0.0-20200528225125-3c3fba18258b // indirect
 	golang.org/x/sys v0.0.0-20200523222454-059865788121 // indirect
 	golang.org/x/tools v0.0.0-20200529172331-a64b76657301 // indirect
