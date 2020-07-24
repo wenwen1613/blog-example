@@ -13,7 +13,6 @@ import (
 	"github.com/wenwen1613/blog-example/pkg/util"
 )
 
-//GetArticle 根据ID查询文章
 //@Summary 根据ID查询文章
 //@Param id path int true "ID"
 //@Success 200 {string} json "{"code":200,"data":{},"msg":"ok"}"

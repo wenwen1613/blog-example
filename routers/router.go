@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"github.com/swaggo/gin-swagger/swaggerFiles"
+	_ "github.com/wenwen1613/blog-example/docs"
 	"github.com/wenwen1613/blog-example/middleware/jwt"
 	"github.com/wenwen1613/blog-example/pkg/setting"
 	"github.com/wenwen1613/blog-example/routers/api"

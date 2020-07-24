@@ -53,16 +53,16 @@ func AddTag(name string, state int, createdBy string) bool {
 }
 
 //BeforeCreate 在创建之前执行.
-// func (tag *Tag) BeforeCreate(scope *gorm.Scope) error {
-// 	_ = scope.SetColumn("CreatedOn", time.Now().Unix())
-// 	return nil
-// }
+//func (tag *Tag) BeforeCreate(scope *gorm.Scope) error {
+//	_ = scope.SetColumn("CreatedOn", time.Now().Unix())
+//	return nil
+//}
 
 //BeforeUpdate 在更新之前操作.
-// func (tag *Tag) BeforeUpdate(scope *gorm.Scope) error {
-// 	_ = scope.SetColumn("ModifiedOn", time.Now().Unix())
-// 	return nil
-// }
+//func (tag *Tag) BeforeUpdate(scope *gorm.Scope) error {
+//	_ = scope.SetColumn("ModifiedOn", time.Now().Unix())
+//	return nil
+//}
 
 //DeleteTag 删除标签.
 func DeleteTag(id int) bool {
@@ -73,5 +73,11 @@ func DeleteTag(id int) bool {
 //EditTag 编辑标签,根据ID更新.
 func EditTag(id int, data interface{}) bool {
 	db.Model(&Tag{}).Where("id=?", id).Updates(data)
+	return true
+}
+
+//CleanAllTag 删除所有标签
+func CleanAllTag() bool {
+	db.Unscoped().Where("deleted_on != ? ", 0).Delete(&Tag{})
 	return true
 }

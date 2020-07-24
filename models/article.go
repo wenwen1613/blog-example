@@ -1,11 +1,5 @@
 package models
 
-import (
-	"time"
-
-	"github.com/jinzhu/gorm"
-)
-
 //Article 文章结构体
 type Article struct {
 	Model
@@ -22,16 +16,16 @@ type Article struct {
 }
 
 //BeforeCreate 新建之前执行操作
-func (article *Article) BeforeCreate(scope *gorm.Scope) error {
-	_ = scope.SetColumn("CreatedOn", time.Now().Unix())
-	return nil
-}
+//func (article *Article) BeforeCreate(scope *gorm.Scope) error {
+//	_ = scope.SetColumn("CreatedOn", time.Now().Unix())
+//	return nil
+//}
 
 //BeforeUpdate 更新之前进行操作
-func (article *Article) BeforeUpdate(scope *gorm.Scope) error {
-	_ = scope.SetColumn("ModifiedOn", time.Now().Unix())
-	return nil
-}
+//func (article *Article) BeforeUpdate(scope *gorm.Scope) error {
+//	_ = scope.SetColumn("ModifiedOn", time.Now().Unix())
+//	return nil
+//}
 
 //ExistArticleByID 根据id判断是有存在
 func ExistArticleByID(id int) bool {
@@ -84,5 +78,10 @@ func AddArticle(data map[string]interface{}) bool {
 		CreatedBy: data["created_by"].(string),
 		State:     data["state"].(int),
 	})
+	return true
+}
+
+func CleanAllArticle() bool {
+	db.Unscoped().Where("deleted_on != ?", 0).Delete(&Article{})
 	return true
 }
